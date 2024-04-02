@@ -72,6 +72,16 @@ const AdminClient = () => {
       .post("/api/liberal", updateData)
       .then(() => {
         toast.success("교양 수업을 등록했습니다!!");
+        setGradePercent({
+          "2023-2-A+": "",
+          "2023-2-B+": "",
+          "2023-1-A+": "",
+          "2023-1-B+": "",
+          "2022-2-A+": "",
+          "2022-2-B+": "",
+          "2022-1-A+": "",
+          "2022-1-B+": "",
+        });
         reset();
       })
       .catch((error) => {
