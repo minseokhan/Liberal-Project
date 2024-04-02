@@ -1,7 +1,7 @@
 {
-  "parser": "babel-eslint",
   "plugins": ["tailwindcss"],
   "extends": ["eslint:recommended", "plugin:tailwindcss/recommended"],
+  "parser": "@babel/eslint-parser",
   "env": {
     "node": true
   }
