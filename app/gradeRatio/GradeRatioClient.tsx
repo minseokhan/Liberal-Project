@@ -73,7 +73,12 @@ const GradeRatioClient = () => {
           onClick={() => router.push("/")}
           className="relative w-[250px] h-[120px] cursor-pointer mt-16"
         >
-          <Image src="/images/logo.jpg" alt="img" fill sizes="100%" />
+          <Image
+            src={process.env.PUBLIC_URL + "/images/logo.jpg"}
+            alt="img"
+            fill
+            sizes="100%"
+          />
         </div>
         <GradeSearch onGradePercentSearch={onGradePercentSearch} />
         <ClassList

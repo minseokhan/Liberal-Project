@@ -36,7 +36,12 @@ const MainClient = () => {
     <div className="relative w-full min-h-screen flex justify-center items-center">
       <div className="flex flex-col justify-center items-center gap-4 mb-28">
         <div className="relative w-[580px] h-[260px] cursor-pointer">
-          <Image src="/images/logo.jpg" alt="img" fill sizes="100%" />
+          <Image
+            src={process.env.PUBLIC_URL + "/images/logo.jpg"}
+            alt="img"
+            fill
+            sizes="100%"
+          />
         </div>
         <div className="flex flex-col gap-2 mb-4">
           <p className="text-blue8 font-semibold text-xl">학교 선택하기</p>
