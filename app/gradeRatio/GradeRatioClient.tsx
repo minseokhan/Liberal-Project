@@ -32,6 +32,19 @@ const GradeRatioClient = () => {
     });
     if (!area && !grade && !percent) {
       return true;
+    } else if (area && !grade && !percent) {
+      const korKeyword = liberal.area === area;
+      return korKeyword;
+    } else if (!area && grade && percent) {
+      const korKeyword = newGradeArr.find(
+        (index) =>
+          index &&
+          (+percent === 0
+            ? +liberal.percentArr[index] >= +percent &&
+              +liberal.percentArr[index] < 10
+            : +liberal.percentArr[index] >= +percent)
+      );
+      return korKeyword;
     } else if (area && grade && percent) {
       const korKeyword =
         liberal.area === area &&

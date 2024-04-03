@@ -31,7 +31,7 @@ const ClassList: React.FC<ClassListProps> = ({
           <div className="mt-40 px-10 py-4 bg-blue0 rounded-lg">
             <p className="text-lg text-blue6">
               {verify
-                ? "검색할 조건을 모두 선택해야 합니다!"
+                ? "학점 등급과 해당 등급의 퍼센트 정도는 모두 선택 후 검색하세요!"
                 : "해당 조건을 만족하는 교양 수업이 존재하지 않습니다."}
             </p>
           </div>
