@@ -19,6 +19,7 @@ const GradeRatioClient = () => {
     percent: "",
   });
   const { area, grade, percent } = searchInfo;
+  const domain = "https://liberal-project.vercel.app";
 
   const verify =
     !(!area && !grade && !percent) && (!area || !grade || !percent);
@@ -74,7 +75,7 @@ const GradeRatioClient = () => {
           className="relative w-[250px] h-[120px] cursor-pointer mt-16"
         >
           <Image
-            src={process.env.PUBLIC_URL + "/images/logo.jpg"}
+            src={domain + "/images/logo.jpg"}
             alt="img"
             fill
             sizes="100%"

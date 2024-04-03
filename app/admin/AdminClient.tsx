@@ -8,8 +8,10 @@ import Button from "../components/Button";
 import Input from "../components/input/Input";
 import PercentInput from "../components/input/PercentInput";
 import AreaAdminSelect from "../components/select/AreaAdminSelect";
+import { useRouter } from "next/navigation";
 
 const AdminClient = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [gradePercent, setGradePercent] = useState({
     "2023-2-A+": "",
@@ -72,17 +74,8 @@ const AdminClient = () => {
       .post("/api/liberal", updateData)
       .then(() => {
         toast.success("교양 수업을 등록했습니다!!");
-        setGradePercent({
-          "2023-2-A+": "",
-          "2023-2-B+": "",
-          "2023-1-A+": "",
-          "2023-1-B+": "",
-          "2022-2-A+": "",
-          "2022-2-B+": "",
-          "2022-1-A+": "",
-          "2022-1-B+": "",
-        });
         reset();
+        router.refresh();
       })
       .catch((error) => {
         toast.error("교양 수업을 등록하는데 문제가 생겼습니다...");

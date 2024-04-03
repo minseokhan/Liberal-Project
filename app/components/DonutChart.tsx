@@ -3,7 +3,6 @@
 import styled from "styled-components";
 
 interface DonutChartProps {
-  size: string;
   deg: number;
   color: string;
   grade: string;
@@ -22,7 +21,7 @@ const ChartBar = styled.div<{ color: string; deg: number }>`
   align-items: center;
 `;
 
-const DonutChart: React.FC<DonutChartProps> = ({ size, deg, color, grade }) => {
+const DonutChart: React.FC<DonutChartProps> = ({ deg, color, grade }) => {
   return (
     <div className="flex flex-col gap-1 justify-center items-center">
       <div
@@ -38,7 +37,7 @@ const DonutChart: React.FC<DonutChartProps> = ({ size, deg, color, grade }) => {
       after:bg-white
         after:top-[50%]
         after:left-[50%]
-        ${size == "big" ? "" : "w-24 h-24 after:w-16 after:h-16"}
+        w-24 h-24 after:w-16 after:h-16
         after:rounded-[50%]
         after:-translate-x-1/2
         after:-translate-y-1/2

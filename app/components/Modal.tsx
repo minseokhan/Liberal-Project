@@ -100,13 +100,11 @@ const Modal: React.FC<ReviewModalProps> = ({
                   </p>
                   <div className="flex flex-row gap-4">
                     <DonutChart
-                      size="small"
                       deg={+liberalInfo.percentArr[i * 2]}
                       color="#8EACCD"
                       grade="A+"
                     />
                     <DonutChart
-                      size="small"
                       deg={+liberalInfo.percentArr[i * 2 + 1]}
                       color="#8EACCD"
                       grade="B+"

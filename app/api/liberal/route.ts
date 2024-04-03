@@ -10,6 +10,12 @@ export async function GET(request: Request) {
     ],
   });
 
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      return resolve(NextResponse.json(liberalInfo));
+    }, 4000);
+  });
+
   return NextResponse.json(liberalInfo);
 }
 

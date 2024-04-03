@@ -26,18 +26,8 @@ const ClassCard: React.FC<ClassCardProps> = ({ onModalOpen, liberal }) => {
             liberal.gradeArr[0].split("-")[1] +
             "학기"}
         </p>
-        <DonutChart
-          size="small"
-          deg={+liberal.percentArr[0]}
-          color="#8EACCD"
-          grade="A+"
-        />
-        <DonutChart
-          size="small"
-          deg={+liberal.percentArr[1]}
-          color="#8EACCD"
-          grade="B+"
-        />
+        <DonutChart deg={+liberal.percentArr[0]} color="#8EACCD" grade="A+" />
+        <DonutChart deg={+liberal.percentArr[1]} color="#8EACCD" grade="B+" />
       </div>
       <div
         onClick={() => onModalOpen(liberal.id)}

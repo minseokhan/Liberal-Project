@@ -8,6 +8,7 @@ import Button from "./Button";
 const MainClient = () => {
   const router = useRouter();
   const [id, setId] = useState(0);
+  const domain = "https://liberal-project.vercel.app";
 
   const buttonInfo = [
     {
@@ -37,7 +38,7 @@ const MainClient = () => {
       <div className="flex flex-col justify-center items-center gap-4 mb-28">
         <div className="relative w-[580px] h-[260px] cursor-pointer">
           <Image
-            src={process.env.PUBLIC_URL + "/images/logo.jpg"}
+            src={domain + "/images/logo.jpg"}
             alt="img"
             fill
             sizes="100%"
