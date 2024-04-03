@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Button from "./Button";
 import DonutChart from "./DonutChart";
 import { AiOutlineClose } from "react-icons/ai";
@@ -29,33 +28,6 @@ const Modal: React.FC<ReviewModalProps> = ({
       newGradeArr.push(gradeHead);
     }
   });
-
-  const gradeArr = [
-    {
-      id: 1,
-      time: "2023-1학기",
-      deg1: 40,
-      deg2: 20,
-    },
-    {
-      id: 2,
-      time: "2023-2학기",
-      deg1: 35,
-      deg2: 25,
-    },
-    {
-      id: 3,
-      time: "2022-1학기",
-      deg1: 36.1,
-      deg2: 30,
-    },
-    {
-      id: 4,
-      time: "2022-2학기",
-      deg1: 60.5,
-      deg2: 8,
-    },
-  ];
 
   return (
     <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800/90">
@@ -116,13 +88,13 @@ const Modal: React.FC<ReviewModalProps> = ({
             <div className="flex flex-row gap-2 justify-end items-center border-t-[1px] border-blue1 mt-1 mr-1 pt-3 cursor-pointer">
               <Button
                 label="에브리타임 바로가기"
-                onClick={() => router.push(liberalInfo.everytimeLink)}
+                onClick={() => window.open(liberalInfo.everytimeLink)}
                 dark={false}
                 modal={true}
               />
               <Button
                 label="포트폴리오 바로가기"
-                onClick={() => router.push(liberalInfo.portfolioLink)}
+                onClick={() => window.open(liberalInfo.portfolioLink)}
                 dark={false}
                 modal={true}
               />

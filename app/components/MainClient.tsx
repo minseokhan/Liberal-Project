@@ -23,14 +23,14 @@ const MainClient = () => {
       id: 3,
       label: "연세대학교",
     },
-    {
-      id: 4,
-      label: "고려대학교",
-    },
   ];
 
   const onClickSchool = (id: number) => {
     setId(id);
+  };
+
+  const onClickAdmin = () => {
+    router.push("/admin");
   };
 
   return (
@@ -56,6 +56,13 @@ const MainClient = () => {
                 open={data.id === id}
               />
             ))}
+            <Button
+              key={7}
+              dark={false}
+              label="교양 등록하기"
+              onClick={onClickAdmin}
+              open={false}
+            />
           </div>
         </div>
         <div className="flex flex-col gap-2">

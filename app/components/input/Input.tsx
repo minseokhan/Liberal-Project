@@ -8,6 +8,7 @@ interface InputProps {
   type: string;
   register: UseFormRegister<FieldValues>;
   disabled?: boolean;
+  onKeyPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -16,6 +17,7 @@ const Input: React.FC<InputProps> = ({
   type,
   register,
   disabled,
+  onKeyPress,
 }) => {
   return (
     <div className="relative w-full">
@@ -25,6 +27,7 @@ const Input: React.FC<InputProps> = ({
         disabled={disabled}
         placeholder={placeholder}
         type={type}
+        onKeyDown={onKeyPress}
         className="
           relative
           w-full

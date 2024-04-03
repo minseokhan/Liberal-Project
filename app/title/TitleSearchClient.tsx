@@ -37,6 +37,10 @@ const TitleSearchClient = () => {
     setModalOpen(false);
   };
 
+  const onResetSearch = () => {
+    setSearchTitle("");
+  };
+
   return (
     <div className="mx-72">
       <div className="relative w-full flex flex-col gap-6 justify-center items-center">
@@ -51,7 +55,10 @@ const TitleSearchClient = () => {
             sizes="100%"
           />
         </div>
-        <TitleSearch onTitleSearch={onTitleSearch} />
+        <TitleSearch
+          onTitleSearch={onTitleSearch}
+          onResetSearch={onResetSearch}
+        />
         <ClassList
           filteredLiberalInfo={filteredLiberalInfo}
           onModalOpen={onModalOpen}

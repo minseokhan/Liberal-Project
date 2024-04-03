@@ -6,6 +6,7 @@ interface InputProps {
   type: string;
   disabled?: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string;
 }
 
 const PercentInput: React.FC<InputProps> = ({
@@ -14,6 +15,7 @@ const PercentInput: React.FC<InputProps> = ({
   type,
   disabled,
   onChange,
+  value,
 }) => {
   return (
     <div className="relative w-full">
@@ -24,6 +26,7 @@ const PercentInput: React.FC<InputProps> = ({
         placeholder={placeholder}
         type={type}
         onChange={onChange}
+        value={value}
         className="
           relative
           w-full

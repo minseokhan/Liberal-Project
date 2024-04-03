@@ -9,11 +9,11 @@ import Input from "../components/input/Input";
 import PercentInput from "../components/input/PercentInput";
 import AreaAdminSelect from "../components/select/AreaAdminSelect";
 import { useRouter } from "next/navigation";
+import AccessModal from "../components/AccessModal";
 
 const AdminClient = () => {
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
-  const [gradePercent, setGradePercent] = useState({
+  const defaultGradePercent = {
     "2023-2-A+": "",
     "2023-2-B+": "",
     "2023-1-A+": "",
@@ -22,7 +22,10 @@ const AdminClient = () => {
     "2022-2-B+": "",
     "2022-1-A+": "",
     "2022-1-B+": "",
-  });
+  };
+  const [isLoading, setIsLoading] = useState(false);
+  const [modalOpen, setModalOpen] = useState(true);
+  const [gradePercent, setGradePercent] = useState(defaultGradePercent);
 
   const {
     register,
@@ -47,6 +50,10 @@ const AdminClient = () => {
       [name]: value,
     };
     setGradePercent(nextGradePercent);
+  };
+
+  const onModalClose = () => {
+    setModalOpen(false);
   };
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -75,7 +82,7 @@ const AdminClient = () => {
       .then(() => {
         toast.success("교양 수업을 등록했습니다!!");
         reset();
-        router.refresh();
+        setGradePercent(defaultGradePercent);
       })
       .catch((error) => {
         toast.error("교양 수업을 등록하는데 문제가 생겼습니다...");
@@ -132,6 +139,7 @@ const AdminClient = () => {
               onChange={onChange}
               placeholder="2023-2학기 A+ 비율을 입력해주세요..."
               type="number"
+              value={gradePercent["2023-2-A+"]}
             />
           </div>
           <div className="w-full flex flex-col gap-1 justify-center">
@@ -141,6 +149,7 @@ const AdminClient = () => {
               onChange={onChange}
               placeholder="2023-2학기 B+ 비율을 입력해주세요..."
               type="number"
+              value={gradePercent["2023-2-B+"]}
             />
           </div>
         </div>
@@ -153,6 +162,7 @@ const AdminClient = () => {
               onChange={onChange}
               placeholder="2023-1학기 A+ 비율을 입력해주세요..."
               type="number"
+              value={gradePercent["2023-1-A+"]}
             />
           </div>
           <div className="w-full flex flex-col gap-1 justify-center">
@@ -162,6 +172,7 @@ const AdminClient = () => {
               onChange={onChange}
               placeholder="2023-1학기 B+ 비율을 입력해주세요..."
               type="number"
+              value={gradePercent["2023-1-B+"]}
             />
           </div>
         </div>
@@ -174,6 +185,7 @@ const AdminClient = () => {
               onChange={onChange}
               placeholder="2022-2학기 A+ 비율을 입력해주세요..."
               type="number"
+              value={gradePercent["2022-2-A+"]}
             />
           </div>
           <div className="w-full flex flex-col gap-1 justify-center">
@@ -183,6 +195,7 @@ const AdminClient = () => {
               onChange={onChange}
               placeholder="2022-2학기 B+ 비율을 입력해주세요..."
               type="number"
+              value={gradePercent["2022-2-B+"]}
             />
           </div>
         </div>
@@ -195,6 +208,7 @@ const AdminClient = () => {
               onChange={onChange}
               placeholder="2022-1학기 A+ 비율을 입력해주세요..."
               type="number"
+              value={gradePercent["2022-1-A+"]}
             />
           </div>
           <div className="w-full flex flex-col gap-1 justify-center">
@@ -204,6 +218,7 @@ const AdminClient = () => {
               onChange={onChange}
               placeholder="2022-1학기 B+ 비율을 입력해주세요..."
               type="number"
+              value={gradePercent["2022-1-B+"]}
             />
           </div>
         </div>
@@ -230,7 +245,13 @@ const AdminClient = () => {
           />
         </div>
 
-        <div className="w-full flex justify-end">
+        <div className="w-full flex flex-row gap-2 justify-end">
+          <Button
+            dark={false}
+            label="메인페이지로 돌아가기"
+            onClick={() => router.push("/")}
+            thin
+          />
           <Button
             dark={false}
             label="교양 등록하기"
@@ -239,6 +260,9 @@ const AdminClient = () => {
           />
         </div>
       </div>
+      {modalOpen && (
+        <AccessModal modalOpen={modalOpen} onModalClose={onModalClose} />
+      )}
     </div>
   );
 };
