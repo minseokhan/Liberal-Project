@@ -38,7 +38,7 @@ const MainClient = () => {
       <div className="flex flex-col justify-center items-center gap-4 mb-28">
         <div className="relative w-[580px] h-[260px] cursor-pointer">
           <Image
-            src={domain + "/images/logo.jpg"}
+            src={domain + "/Images/logo.jpg"}
             alt="img"
             fill
             sizes="100%"

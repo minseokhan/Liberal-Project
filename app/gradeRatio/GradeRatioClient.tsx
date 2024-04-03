@@ -75,7 +75,7 @@ const GradeRatioClient = () => {
           className="relative w-[250px] h-[120px] cursor-pointer mt-16"
         >
           <Image
-            src={domain + "/images/logo.jpg"}
+            src={domain + "/Images/logo.jpg"}
             alt="img"
             fill
             sizes="100%"

@@ -253,7 +253,7 @@ const AdminClient = () => {
             thin
           />
           <Button
-            dark={false}
+            dark={true}
             label="교양 등록하기"
             onClick={handleSubmit(onSubmit)}
             thin
