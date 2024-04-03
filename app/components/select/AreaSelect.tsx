@@ -5,11 +5,11 @@ import { IoCheckmark } from "react-icons/io5";
 
 interface AreaSelectProps {
   onClick: (key: string, value: string) => void;
+  area: string;
 }
 
-const AreaSelect: React.FC<AreaSelectProps> = ({ onClick }) => {
+const AreaSelect: React.FC<AreaSelectProps> = ({ onClick, area }) => {
   const [areaOpen, setAreaOpen] = useState(false);
-  const [area, setArea] = useState("교양 영역");
   const AreaArr = [
     "고전읽기영역",
     "글로벌언어와문화영역",
@@ -23,11 +23,6 @@ const AreaSelect: React.FC<AreaSelectProps> = ({ onClick }) => {
 
   const onAreaOpen = () => {
     setAreaOpen(!areaOpen);
-  };
-
-  const onSelectArea = (area: string) => {
-    setArea(area);
-    setAreaOpen(false);
   };
 
   return (
@@ -72,7 +67,7 @@ const AreaSelect: React.FC<AreaSelectProps> = ({ onClick }) => {
             <li
               key={_}
               onClick={() => {
-                onSelectArea(data), onClick("area", data);
+                onClick("area", data), setAreaOpen(false);
               }}
               className={`relative cursor-default select-none ${
                 area === data ? "bg-blue0" : "bg-white"

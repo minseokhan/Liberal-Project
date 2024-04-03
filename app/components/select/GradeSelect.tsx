@@ -5,20 +5,15 @@ import { IoCheckmark } from "react-icons/io5";
 
 interface GradeSelectProps {
   onClick: (key: string, value: string) => void;
+  grade: string;
 }
 
-const GradeSelect: React.FC<GradeSelectProps> = ({ onClick }) => {
+const GradeSelect: React.FC<GradeSelectProps> = ({ onClick, grade }) => {
   const [gradeOpen, setGradeOpen] = useState(false);
-  const [grade, setGrade] = useState("학점 등급");
   const GradeArr = ["A+", "B+"];
 
   const onAreaOpen = () => {
     setGradeOpen(!gradeOpen);
-  };
-
-  const onSelectArea = (grade: string) => {
-    setGrade(grade);
-    setGradeOpen(false);
   };
 
   return (
@@ -63,7 +58,7 @@ const GradeSelect: React.FC<GradeSelectProps> = ({ onClick }) => {
             <li
               key={_}
               onClick={() => {
-                onSelectArea(data), onClick("grade", data);
+                onClick("grade", data), setGradeOpen(false);
               }}
               className={`relative cursor-default select-none ${
                 grade === data ? "bg-blue0" : "bg-white"

@@ -5,11 +5,11 @@ import { IoCheckmark } from "react-icons/io5";
 
 interface PercentSelectProps {
   onClick: (key: string, value: string) => void;
+  percent: string;
 }
 
-const PercentSelect: React.FC<PercentSelectProps> = ({ onClick }) => {
+const PercentSelect: React.FC<PercentSelectProps> = ({ onClick, percent }) => {
   const [percentOpen, setPercentOpen] = useState(false);
-  const [percent, setPercent] = useState("해당 등급 퍼센트 정도");
   const PercentArr = [
     "10% 미만",
     "10% 이상",
@@ -23,11 +23,6 @@ const PercentSelect: React.FC<PercentSelectProps> = ({ onClick }) => {
 
   const onAreaOpen = () => {
     setPercentOpen(!percentOpen);
-  };
-
-  const onSelectArea = (percent: string) => {
-    setPercent(percent);
-    setPercentOpen(false);
   };
 
   return (
@@ -72,11 +67,11 @@ const PercentSelect: React.FC<PercentSelectProps> = ({ onClick }) => {
             <li
               key={_}
               onClick={() => {
-                onSelectArea(data),
-                  onClick(
-                    "percent",
-                    data === "10% 미만" ? "0" : data.split("%")[0]
-                  );
+                onClick(
+                  "percent",
+                  data === "10% 미만" ? "0" : data.split("%")[0]
+                ),
+                  setPercentOpen(false);
               }}
               className={`relative cursor-default select-none ${
                 percent === data ? "bg-blue0" : "bg-white"

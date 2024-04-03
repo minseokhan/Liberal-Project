@@ -13,16 +13,17 @@ const GradeRatioClient = () => {
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
   const [id, setId] = useState("");
-  const [searchInfo, setSearchInfo] = useState({
+  const defaultData = {
     area: "",
     grade: "",
     percent: "",
-  });
+  };
+  const [searchInfo, setSearchInfo] = useState(defaultData);
   const { area, grade, percent } = searchInfo;
   const domain = "https://liberal-project.vercel.app";
 
   const verify =
-    !(!area && !grade && !percent) && (!area || !grade || !percent);
+    (area && grade && !percent) || (area && !grade && percent) ? true : false;
 
   const { data: liberalInfo } = useSWR<SafeLiberal[]>("/api/liberal");
 
@@ -67,7 +68,18 @@ const GradeRatioClient = () => {
     grade: string;
     percent: string;
   }) => {
-    setSearchInfo(data);
+    let newData = data;
+    if (data.area === "교양 영역") {
+      newData = { ...newData, area: "" };
+    }
+    if (data.grade === "학점 등급") {
+      newData = { ...newData, grade: "" };
+    }
+    if (data.percent === "해당 등급 퍼센트 정도") {
+      newData = { ...newData, percent: "" };
+    }
+    console.log(newData);
+    setSearchInfo(newData);
   };
 
   const onModalOpen = (id: string) => {
@@ -94,7 +106,10 @@ const GradeRatioClient = () => {
             sizes="100%"
           />
         </div>
-        <GradeSearch onGradePercentSearch={onGradePercentSearch} />
+        <GradeSearch
+          onGradePercentSearch={onGradePercentSearch}
+          onReset={() => setSearchInfo(defaultData)}
+        />
         <ClassList
           verify={verify}
           filteredLiberalInfo={filteredLiberalInfo}
