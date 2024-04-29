@@ -95,7 +95,7 @@ const AdminClient = () => {
   };
 
   return (
-    <div className="mx-[500px]">
+    <div className="mx-[50px] sm:mx-[100px] md:mx-[150px] lg:mx-[200px] xl:mx-[350px] 2xl:mx-[500px]">
       <div className="relative w-full min-h-screen flex flex-col gap-6 justify-center items-center">
         <p className="text-blue7 font-semibold text-3xl text-center mb-5">
           교양 등록하기

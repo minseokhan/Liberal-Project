@@ -43,7 +43,7 @@ const DonutChart: React.FC<DonutChartProps> = ({ deg, color, grade }) => {
         after:-translate-y-1/2
       `}
       >
-        <ChartBar deg={+deg} color={color}>
+        <ChartBar deg={deg == "-" ? 0 : +deg} color={color}>
           <p className="z-20 text-blue7">{deg == "-" ? "--" : deg + "%"}</p>
         </ChartBar>
       </div>

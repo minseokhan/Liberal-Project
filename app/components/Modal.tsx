@@ -28,7 +28,7 @@ const Modal: React.FC<ReviewModalProps> = ({
   });
 
   return (
-    <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800/90">
+    <div className="justify-center sm:items-center flex overflow-x-hidden overflow-y-scroll fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800/90">
       <div className="relative w-full md:w-4/6 lg:w-3/5 xl:w-2/5 mx-auto">
         <div
           className={`

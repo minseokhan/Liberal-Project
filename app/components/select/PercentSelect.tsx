@@ -67,11 +67,7 @@ const PercentSelect: React.FC<PercentSelectProps> = ({ onClick, percent }) => {
             <li
               key={_}
               onClick={() => {
-                onClick(
-                  "percent",
-                  data === "10% 미만" ? "0" : data.split("%")[0]
-                ),
-                  setPercentOpen(false);
+                onClick("percent", data), setPercentOpen(false);
               }}
               className={`relative cursor-default select-none ${
                 percent === data ? "bg-blue0" : "bg-white"

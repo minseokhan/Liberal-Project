@@ -26,7 +26,7 @@ const TitleSearch: React.FC<TitleSearchProps> = ({
   return (
     <div className="w-full flex flex-row justify-center items-center gap-3 py-4 border-t-[1px] border-b-[1px] border-blue1 mb-2">
       <div className="w-full flex flex-col lghalf:flex-row justify-center items-center gap-4">
-        <div className="relative w-full md:w-56">
+        <div className="relative w-full md:w-80 lghalf:w-56">
           <PercentInput
             id="name"
             onChange={onChange}

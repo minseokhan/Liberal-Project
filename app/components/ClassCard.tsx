@@ -10,6 +10,8 @@ interface ClassCardProps {
 }
 
 const ClassCard: React.FC<ClassCardProps> = ({ onModalOpen, liberal }) => {
+  const isNull = liberal.percentArr[0] == "-" && liberal.percentArr[1] == "-";
+
   return (
     <div className="w-full relative flex flex-col gap-2 border-[1px] border-blue4 rounded-lg py-3 px-4">
       <div className="flex justify-between items-end border-b-[1px] border-blue1 pb-1 px-1">
@@ -23,13 +25,21 @@ const ClassCard: React.FC<ClassCardProps> = ({ onModalOpen, liberal }) => {
       </p>
       <div className="w-full flex flex-row justify-center items-center gap-5 mt-3 border-b-[1px] border-blue1 pb-2">
         <p className="text-blue8 text-base font-semibold mb-5">
-          {liberal.gradeArr[0].split("-")[0] +
+          {liberal.gradeArr[isNull ? 2 : 0].split("-")[0] +
             "-" +
-            liberal.gradeArr[0].split("-")[1] +
+            liberal.gradeArr[isNull ? 2 : 0].split("-")[1] +
             "학기"}
         </p>
-        <DonutChart deg={liberal.percentArr[0]} color="#8EACCD" grade="A+" />
-        <DonutChart deg={liberal.percentArr[1]} color="#8EACCD" grade="B+" />
+        <DonutChart
+          deg={liberal.percentArr[isNull ? 2 : 0]}
+          color="#8EACCD"
+          grade="A+"
+        />
+        <DonutChart
+          deg={liberal.percentArr[isNull ? 3 : 1]}
+          color="#8EACCD"
+          grade="B+"
+        />
       </div>
       <div
         onClick={() => onModalOpen(liberal.id)}

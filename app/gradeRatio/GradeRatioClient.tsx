@@ -36,34 +36,35 @@ const GradeRatioClient = () => {
   const { data: liberalInfo } = useSWR<SafeLiberal[]>("/api/liberal");
 
   const filteredLiberalInfo = liberalInfo?.filter((liberal) => {
+    const percentNum = percent == "10% 미만" ? 0 : percent.split("%")[0];
     const newGradeArr = liberal.gradeArr.map((data, i) => {
       if (data.split("-")[2] === grade) return i;
     });
-    if (!area && !grade && !percent) {
+    if (!area && !grade && !percentNum) {
       return true;
-    } else if (area && !grade && !percent) {
+    } else if (area && !grade && !percentNum) {
       const korKeyword = liberal.area === area;
       return korKeyword;
-    } else if (!area && grade && percent) {
+    } else if (!area && grade && percentNum) {
       const korKeyword = newGradeArr.find(
         (index) =>
           index &&
-          (+percent === 0
-            ? +liberal.percentArr[index] >= +percent &&
+          (+percentNum === 0
+            ? +liberal.percentArr[index] >= +percentNum &&
               +liberal.percentArr[index] < 10
-            : +liberal.percentArr[index] >= +percent)
+            : +liberal.percentArr[index] >= +percentNum)
       );
       return korKeyword;
-    } else if (area && grade && percent) {
+    } else if (area && grade && percentNum) {
       const korKeyword =
         liberal.area === area &&
         newGradeArr.find(
           (index) =>
             index &&
-            (+percent === 0
-              ? +liberal.percentArr[index] >= +percent &&
+            (+percentNum === 0
+              ? +liberal.percentArr[index] >= +percentNum &&
                 +liberal.percentArr[index] < 10
-              : +liberal.percentArr[index] >= +percent)
+              : +liberal.percentArr[index] >= +percentNum)
         );
       return korKeyword;
     } else {
@@ -86,7 +87,6 @@ const GradeRatioClient = () => {
     if (data.percent === "해당 등급 퍼센트 정도") {
       newData = { ...newData, percent: "" };
     }
-    console.log(newData);
     setSearchInfo(newData);
   };
 
