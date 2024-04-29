@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ClassList from "../components/ClassList";
 import Modal from "../components/Modal";
 import GradeSearch from "../components/search/GradeSearch";
@@ -21,6 +21,14 @@ const GradeRatioClient = () => {
   const [searchInfo, setSearchInfo] = useState(defaultData);
   const { area, grade, percent } = searchInfo;
   const domain = "https://liberal-project.vercel.app";
+
+  useEffect(() => {
+    if (modalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [modalOpen]);
 
   const verify =
     (area && grade && !percent) || (area && !grade && percent) ? true : false;
@@ -93,11 +101,11 @@ const GradeRatioClient = () => {
   };
 
   return (
-    <div className="mx-72">
+    <div className="mx-4 sm:mx-8 md:mx-16 lg:mx-28 xl:mx-40 xlhalf:mx-56 2xl:mx-72">
       <div className="relative w-full flex flex-col gap-6 justify-center items-center">
         <div
           onClick={() => router.push("/")}
-          className="relative w-[250px] h-[120px] cursor-pointer mt-16"
+          className="relative w-[250px] h-[120px] cursor-pointer mt-8 sm:mt-16"
         >
           <Image
             src={domain + "/Images/logo.jpg"}

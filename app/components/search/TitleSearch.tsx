@@ -25,8 +25,8 @@ const TitleSearch: React.FC<TitleSearchProps> = ({
   };
   return (
     <div className="w-full flex flex-row justify-center items-center gap-3 py-4 border-t-[1px] border-b-[1px] border-blue1 mb-2">
-      <div className="flex flex-row gap-4">
-        <div className="w-96 relative">
+      <div className="w-full flex flex-col lghalf:flex-row justify-center items-center gap-4">
+        <div className="relative w-full md:w-56">
           <PercentInput
             id="name"
             onChange={onChange}
@@ -35,13 +35,15 @@ const TitleSearch: React.FC<TitleSearchProps> = ({
             value={title}
           />
         </div>
-        <Button
-          dark={false}
-          label="검색하기"
-          onClick={() => onTitleSearch(title)}
-          thin
-        />
-        <Button dark={true} label="검색 내용 초기화" onClick={onReset} thin />
+        <div className="flex w-full md:w-auto flex-col md:flex-row gap-2 md:gap-4">
+          <Button
+            dark={false}
+            label="검색하기"
+            onClick={() => onTitleSearch(title)}
+            thin
+          />
+          <Button dark={true} label="검색 내용 초기화" onClick={onReset} thin />
+        </div>
       </div>
     </div>
   );

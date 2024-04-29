@@ -4,7 +4,6 @@ import Button from "./Button";
 import DonutChart from "./DonutChart";
 import { AiOutlineClose } from "react-icons/ai";
 import { SafeLiberal } from "../types";
-import { useRouter } from "next/navigation";
 
 interface ReviewModalProps {
   modalOpen: boolean;
@@ -17,7 +16,6 @@ const Modal: React.FC<ReviewModalProps> = ({
   onModalClose,
   liberalInfo,
 }) => {
-  const router = useRouter();
   let newGradeArr: string[] = [];
 
   if (!liberalInfo) return null;
@@ -31,7 +29,7 @@ const Modal: React.FC<ReviewModalProps> = ({
 
   return (
     <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800/90">
-      <div className="relative w-full md:w-4/6 lg:w-3/6 xl:w-2/6 mx-auto">
+      <div className="relative w-full md:w-4/6 lg:w-3/5 xl:w-2/5 mx-auto">
         <div
           className={`
               translate
@@ -42,10 +40,10 @@ const Modal: React.FC<ReviewModalProps> = ({
             `}
         >
           <div className="relative w-full bg-white flex flex-col gap-2 rounded-md px-5 py-5">
-            <div className="flex justify-between items-end border-b-[1px] border-blue1 pb-2 px-1">
-              <div className="flex flex-row items-end gap-2 text-blue8 text-xl font-semibold">
-                {liberalInfo.name}
-                <span className="text-blue5 text-lg">
+            <div className="flex justify-between gap-2 items-end border-b-[1px] border-blue1 pb-2 px-1">
+              <div className="text-blue8 text-xl font-semibold">
+                <span className="pr-2">{liberalInfo.name}</span>
+                <span className="text-blue5 text-lg inline-block">
                   ({liberalInfo.credit}학점)
                 </span>
               </div>
@@ -61,23 +59,23 @@ const Modal: React.FC<ReviewModalProps> = ({
                 {liberalInfo.area}
               </span>
             </p>
-            <div className="grid grid-cols-2 [&>*:nth-child(2)]:border-b-[0.5px] [&>*:nth-child(3)]:border-t-[0.5px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 [&>*:nth-child(2)]:border-b-[0.5px] [&>*:nth-child(3)]:border-t-[0.5px]">
               {newGradeArr.map((grade, i) => (
                 <div
                   key={i}
-                  className="w-full flex flex-col justify-center items-center gap-3 py-2 border-blue1 odd:border-r-[0.5px] first:border-b-[0.5px] even:border-l-[0.5px] last:border-t-[0.5px]"
+                  className="w-full flex flex-col justify-center items-center gap-3 py-2 border-blue1 sm:odd:border-r-[0.5px] first:border-b-[1px] sm:first:border-b-[0.5px] sm:even:border-l-[0.5px] last:border-t-[1px] sm:last:border-t-[0.5px]"
                 >
                   <p className="text-blue8 text-base font-semibold">
                     {grade}학기
                   </p>
-                  <div className="flex flex-row gap-4">
+                  <div className="flex flex-row gap-8 sm:gap-6 lg:gap-7 xl:gap-4">
                     <DonutChart
-                      deg={+liberalInfo.percentArr[i * 2]}
+                      deg={liberalInfo.percentArr[i * 2]}
                       color="#8EACCD"
                       grade="A+"
                     />
                     <DonutChart
-                      deg={+liberalInfo.percentArr[i * 2 + 1]}
+                      deg={liberalInfo.percentArr[i * 2 + 1]}
                       color="#8EACCD"
                       grade="B+"
                     />

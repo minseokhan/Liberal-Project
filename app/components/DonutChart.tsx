@@ -3,7 +3,7 @@
 import styled from "styled-components";
 
 interface DonutChartProps {
-  deg: number;
+  deg: string;
   color: string;
   grade: string;
 }
@@ -13,8 +13,8 @@ const ChartBar = styled.div<{ color: string; deg: number }>`
   height: 100%;
   border-radius: 50%;
   background: ${(props) =>
-    `conic-gradient(#f5f5f5 ${360 - props.deg * 3.6}deg, ${props.color} ${
-      360 - props.deg * 3.6
+    `conic-gradient(#f5f5f5 ${360 - +props.deg * 3.6}deg, ${props.color} ${
+      360 - +props.deg * 3.6
     }deg)`};
   display: flex;
   justify-content: center;
@@ -43,8 +43,8 @@ const DonutChart: React.FC<DonutChartProps> = ({ deg, color, grade }) => {
         after:-translate-y-1/2
       `}
       >
-        <ChartBar deg={deg} color={color}>
-          <p className="z-20 text-blue7">{deg}%</p>
+        <ChartBar deg={+deg} color={color}>
+          <p className="z-20 text-blue7">{deg == "-" ? "--" : deg + "%"}</p>
         </ChartBar>
       </div>
       <p className="text-blue7">{grade}</p>

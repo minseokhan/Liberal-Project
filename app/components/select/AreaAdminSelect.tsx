@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FieldValues, UseFormSetValue } from "react-hook-form";
 import { IoCheckmark } from "react-icons/io5";
 
@@ -8,12 +8,16 @@ interface AreaAdminSelectProps {
   id: string;
   setValue: UseFormSetValue<FieldValues>;
   disabled?: boolean;
+  areaReset: boolean;
+  reset: () => void;
 }
 
 const AreaAdminSelect: React.FC<AreaAdminSelectProps> = ({
   id,
   setValue,
   disabled,
+  areaReset,
+  reset,
 }) => {
   const [areaOpen, setAreaOpen] = useState(false);
   const [area, setArea] = useState("교양 영역");
@@ -27,6 +31,13 @@ const AreaAdminSelect: React.FC<AreaAdminSelectProps> = ({
     "인문과예술영역",
     "사회와세계영역",
   ];
+
+  useEffect(() => {
+    if (areaReset) {
+      setArea("교양 영역");
+      reset();
+    }
+  }, [areaReset]);
 
   const onAreaOpen = () => {
     setAreaOpen(!areaOpen);

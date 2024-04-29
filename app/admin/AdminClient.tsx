@@ -25,6 +25,7 @@ const AdminClient = () => {
   };
   const [isLoading, setIsLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(true);
+  const [areaReset, setAreaReset] = useState(false);
   const [gradePercent, setGradePercent] = useState(defaultGradePercent);
 
   const {
@@ -82,6 +83,7 @@ const AdminClient = () => {
       .then(() => {
         toast.success("교양 수업을 등록했습니다!!");
         reset();
+        setAreaReset(true);
         setGradePercent(defaultGradePercent);
       })
       .catch((error) => {
@@ -117,6 +119,8 @@ const AdminClient = () => {
               id="area"
               setValue={setValue}
               disabled={isLoading}
+              areaReset={areaReset}
+              reset={() => setAreaReset(false)}
             />
           </div>
           <div className="w-full flex flex-col gap-1 justify-center">

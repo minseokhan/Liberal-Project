@@ -17,7 +17,7 @@ const ClassList: React.FC<ClassListProps> = ({
   return (
     <>
       {filteredLiberalInfo && filteredLiberalInfo?.length !== 0 ? (
-        <div className="w-full grid grid-cols-3 gap-x-3 gap-y-4">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lghalf:grid-cols-3 gap-x-3 gap-y-4 mb-16">
           {filteredLiberalInfo.map((liberal) => (
             <ClassCard
               key={liberal.id}

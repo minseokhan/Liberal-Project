@@ -39,6 +39,10 @@ module.exports = {
       ringColor: {
         blue3: "#B0C6E4",
       },
+      screens: {
+        xlhalf: "1400px",
+        lghalf: "1170px",
+      },
     },
   },
   plugins: [],

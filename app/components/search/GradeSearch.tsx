@@ -41,28 +41,33 @@ const GradeSearch: React.FC<GradeSearchProps> = ({
 
   return (
     <div className="w-full flex flex-row justify-center items-center gap-3 py-4 border-t-[1px] border-b-[1px] border-blue1 mb-2">
-      <div className="flex flex-row gap-4">
-        <div className="relative w-52">
-          <AreaSelect onClick={onClick} area={data.area} />
+      <div className="relative w-full flex flex-col lghalf:flex-row justify-center items-center gap-4">
+        <div className="relative w-full md:w-auto flex flex-col md:flex-row justify-center gap-2 md:gap-4">
+          <div className="relative w-full md:w-52">
+            <AreaSelect onClick={onClick} area={data.area} />
+          </div>
+          <div className="relative w-full md:w-44">
+            <GradeSelect onClick={onClick} grade={data.grade} />
+          </div>
+          <div className="relative w-full md:w-56">
+            <PercentSelect onClick={onClick} percent={data.percent} />
+          </div>
         </div>
-        <div className="relative w-44">
-          <GradeSelect onClick={onClick} grade={data.grade} />
+
+        <div className="flex w-full md:w-auto flex-col md:flex-row gap-2 md:gap-4">
+          <Button
+            dark={false}
+            label="검색하기"
+            onClick={() => onGradePercentSearch(data)}
+            thin
+          />
+          <Button
+            dark={true}
+            label="검색 조건 초기화"
+            onClick={onAllReset}
+            thin
+          />
         </div>
-        <div className="relative w-56">
-          <PercentSelect onClick={onClick} percent={data.percent} />
-        </div>
-        <Button
-          dark={false}
-          label="검색하기"
-          onClick={() => onGradePercentSearch(data)}
-          thin
-        />
-        <Button
-          dark={true}
-          label="검색 조건 초기화"
-          onClick={onAllReset}
-          thin
-        />
       </div>
     </div>
   );
