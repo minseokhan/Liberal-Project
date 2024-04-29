@@ -36,7 +36,7 @@ const MainClient = () => {
   return (
     <div className="relative w-full min-h-screen flex justify-center items-center">
       <div className="flex flex-col justify-center items-center gap-12 mb-28">
-        <div className="relative w-[280px] h-[130px] sm:w-[330px] sm:h-[150px] md:w-[400px] md:h-[190px] lg:w-[560px] lg:h-[250px] cursor-pointer">
+        <div className="relative w-[280px] h-[130px] sm:w-[330px] sm:h-[150px] md:w-[400px] md:h-[190px] lg:w-[550px] lg:h-[250px] cursor-pointer">
           <Image
             src={domain + "/Images/logo.jpg"}
             alt="img"
