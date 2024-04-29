@@ -142,7 +142,7 @@ const AdminClient = () => {
               id="2023-2-A+"
               onChange={onChange}
               placeholder="2023-2학기 A+ 비율을 입력해주세요..."
-              type="number"
+              type="text"
               value={gradePercent["2023-2-A+"]}
             />
           </div>
@@ -152,7 +152,7 @@ const AdminClient = () => {
               id="2023-2-B+"
               onChange={onChange}
               placeholder="2023-2학기 B+ 비율을 입력해주세요..."
-              type="number"
+              type="text"
               value={gradePercent["2023-2-B+"]}
             />
           </div>
@@ -165,7 +165,7 @@ const AdminClient = () => {
               id="2023-1-A+"
               onChange={onChange}
               placeholder="2023-1학기 A+ 비율을 입력해주세요..."
-              type="number"
+              type="text"
               value={gradePercent["2023-1-A+"]}
             />
           </div>
@@ -175,7 +175,7 @@ const AdminClient = () => {
               id="2023-1-B+"
               onChange={onChange}
               placeholder="2023-1학기 B+ 비율을 입력해주세요..."
-              type="number"
+              type="text"
               value={gradePercent["2023-1-B+"]}
             />
           </div>
@@ -188,7 +188,7 @@ const AdminClient = () => {
               id="2022-2-A+"
               onChange={onChange}
               placeholder="2022-2학기 A+ 비율을 입력해주세요..."
-              type="number"
+              type="text"
               value={gradePercent["2022-2-A+"]}
             />
           </div>
@@ -198,7 +198,7 @@ const AdminClient = () => {
               id="2022-2-B+"
               onChange={onChange}
               placeholder="2022-2학기 B+ 비율을 입력해주세요..."
-              type="number"
+              type="text"
               value={gradePercent["2022-2-B+"]}
             />
           </div>
@@ -211,7 +211,7 @@ const AdminClient = () => {
               id="2022-1-A+"
               onChange={onChange}
               placeholder="2022-1학기 A+ 비율을 입력해주세요..."
-              type="number"
+              type="text"
               value={gradePercent["2022-1-A+"]}
             />
           </div>
@@ -221,7 +221,7 @@ const AdminClient = () => {
               id="2022-1-B+"
               onChange={onChange}
               placeholder="2022-1학기 B+ 비율을 입력해주세요..."
-              type="number"
+              type="text"
               value={gradePercent["2022-1-B+"]}
             />
           </div>
