@@ -2,12 +2,9 @@ import { NextResponse } from "next/server";
 import prisma from "@/app/libs/prismadb";
 
 export async function GET(request: Request) {
-  console.log(request.url);
   const search = request.url.split("=")[1].split("&")[0];
   const page = +request.url.split("=")[2].split("&")[0];
   const limit = +request.url.split("=")[3];
-
-  console.log(decodeURIComponent(search), page, limit);
 
   if (search) {
     const liberalInfo = await prisma.liberal.findMany({
