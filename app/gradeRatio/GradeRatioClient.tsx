@@ -109,6 +109,7 @@ const GradeRatioClient = () => {
             </div>
           }
           dataLength={paginatedLiberal?.length ?? 0}
+          className="w-full"
         >
           <ClassList
             filteredLiberalInfo={paginatedLiberal}
