@@ -8,3 +8,7 @@ body,
   height: 100%;
   box-sizing: border-box;
 }
+
+.infinite-scroll-component {
+  overflow: hidden !important;
+}

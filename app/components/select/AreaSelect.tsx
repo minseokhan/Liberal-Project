@@ -14,7 +14,6 @@ const AreaSelect: React.FC<AreaSelectProps> = ({ onClick, area }) => {
     "고전읽기영역",
     "글로벌언어와문화영역",
     "소프트웨어영역",
-    "IC-PBL강좌",
     "미래산업과창업영역",
     "과학과기술영역",
     "인문과예술영역",

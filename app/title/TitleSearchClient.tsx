@@ -8,6 +8,9 @@ import Modal from "../components/Modal";
 import TitleSearch from "../components/search/TitleSearch";
 import { SafeLiberal } from "../types";
 import useSWR from "swr";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { LuLoader2 } from "react-icons/lu";
+import { usePagination } from "../hook/usePagination";
 
 const TitleSearchClient = () => {
   const router = useRouter();
@@ -24,12 +27,10 @@ const TitleSearchClient = () => {
     }
   }, [modalOpen]);
 
-  const { data: liberalInfo } = useSWR<SafeLiberal[]>("/api/liberal");
-
-  const filteredLiberalInfo = liberalInfo?.filter((liberal) => {
-    const korKeyword = liberal.name.includes(searchTitle || "");
-    return korKeyword;
-  });
+  const { paginatedLiberal, isReachedEnd, size, setSize } =
+    usePagination<SafeLiberal>(
+      `/api/search?search=${encodeURIComponent(searchTitle)}&`
+    );
 
   const onTitleSearch = (searchWord: string) => {
     setSearchTitle(searchWord);
@@ -67,15 +68,26 @@ const TitleSearchClient = () => {
           onTitleSearch={onTitleSearch}
           onResetSearch={onResetSearch}
         />
-        <ClassList
-          filteredLiberalInfo={filteredLiberalInfo}
-          onModalOpen={onModalOpen}
-        />
+        <InfiniteScroll
+          next={() => setSize(size + 1)}
+          hasMore={!isReachedEnd}
+          loader={
+            <div className="w-full flex justify-center mb-12">
+              <LuLoader2 size={30} className="text-blue6 animate-spin" />
+            </div>
+          }
+          dataLength={paginatedLiberal?.length ?? 0}
+        >
+          <ClassList
+            filteredLiberalInfo={paginatedLiberal}
+            onModalOpen={onModalOpen}
+          />
+        </InfiniteScroll>
       </div>
 
       {modalOpen && (
         <Modal
-          liberalInfo={filteredLiberalInfo?.find((data) => data.id === id)}
+          liberalInfo={paginatedLiberal?.find((data) => data.id === id)}
           modalOpen={modalOpen}
           onModalClose={onModalClose}
         />

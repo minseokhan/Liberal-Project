@@ -2,12 +2,19 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import ClassList from "../components/ClassList";
 import Modal from "../components/Modal";
 import GradeSearch from "../components/search/GradeSearch";
 import { SafeLiberal } from "../types";
 import useSWR from "swr";
+import useSWRInfinite, { unstable_serialize } from "swr/infinite";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { usePagination } from "../hook/usePagination";
+import { LuLoader2 } from "react-icons/lu";
+import { mutate } from "swr";
+import { AreaArr, GradeArr, PercentArr } from "../data";
+import toast from "react-hot-toast";
 
 const GradeRatioClient = () => {
   const router = useRouter();
@@ -30,64 +37,39 @@ const GradeRatioClient = () => {
     }
   }, [modalOpen]);
 
-  const verify =
-    (area && grade && !percent) || (area && !grade && percent) ? true : false;
-
-  const { data: liberalInfo } = useSWR<SafeLiberal[]>("/api/liberal");
-
-  const filteredLiberalInfo = liberalInfo?.filter((liberal) => {
-    const percentNum = percent == "10% 미만" ? 0 : percent.split("%")[0];
-    const newGradeArr = liberal.gradeArr.map((data, i) => {
-      if (data.split("-")[2] === grade) return i;
-    });
-    if (!area && !grade && !percentNum) {
-      return true;
-    } else if (area && !grade && !percentNum) {
-      const korKeyword = liberal.area === area;
-      return korKeyword;
-    } else if (!area && grade && percentNum) {
-      const korKeyword = newGradeArr.find(
-        (index) =>
-          index &&
-          (+percentNum === 0
-            ? +liberal.percentArr[index] >= +percentNum &&
-              +liberal.percentArr[index] < 10
-            : +liberal.percentArr[index] >= +percentNum)
-      );
-      return korKeyword;
-    } else if (area && grade && percentNum) {
-      const korKeyword =
-        liberal.area === area &&
-        newGradeArr.find(
-          (index) =>
-            index &&
-            (+percentNum === 0
-              ? +liberal.percentArr[index] >= +percentNum &&
-                +liberal.percentArr[index] < 10
-              : +liberal.percentArr[index] >= +percentNum)
-        );
-      return korKeyword;
-    } else {
-      return false;
-    }
-  });
+  const { paginatedLiberal, isReachedEnd, size, setSize } =
+    usePagination<SafeLiberal>(
+      `/api/test?area=${AreaArr.find((o) => o.area === area)?.id}&grade=${
+        GradeArr.find((o) => o.grade === grade)?.id
+      }&percent=${PercentArr.find((o) => o.percent === percent)?.id}&`
+    );
 
   const onGradePercentSearch = (data: {
     area: string;
     grade: string;
     percent: string;
   }) => {
-    let newData = data;
-    if (data.area === "교양 영역") {
-      newData = { ...newData, area: "" };
+    if (
+      (data.grade === "학점 등급" &&
+        data.percent !== "해당 등급 퍼센트 정도") ||
+      (data.grade !== "학점 등급" && data.percent === "해당 등급 퍼센트 정도")
+    ) {
+      toast.error(
+        "학점 등급과 해당 등급의 퍼센트 정도는 모두 선택 후 검색하세요!"
+      );
+    } else {
+      let newData = data;
+      if (data.area === "교양 영역") {
+        newData = { ...newData, area: "" };
+      }
+      if (data.grade === "학점 등급") {
+        newData = { ...newData, grade: "" };
+      }
+      if (data.percent === "해당 등급 퍼센트 정도") {
+        newData = { ...newData, percent: "" };
+      }
+      setSearchInfo(newData);
     }
-    if (data.grade === "학점 등급") {
-      newData = { ...newData, grade: "" };
-    }
-    if (data.percent === "해당 등급 퍼센트 정도") {
-      newData = { ...newData, percent: "" };
-    }
-    setSearchInfo(newData);
   };
 
   const onModalOpen = (id: string) => {
@@ -118,16 +100,26 @@ const GradeRatioClient = () => {
           onGradePercentSearch={onGradePercentSearch}
           onReset={() => setSearchInfo(defaultData)}
         />
-        <ClassList
-          verify={verify}
-          filteredLiberalInfo={filteredLiberalInfo}
-          onModalOpen={onModalOpen}
-        />
+        <InfiniteScroll
+          next={() => setSize(size + 1)}
+          hasMore={!isReachedEnd}
+          loader={
+            <div className="w-full flex justify-center mb-12">
+              <LuLoader2 size={30} className="text-blue6 animate-spin" />
+            </div>
+          }
+          dataLength={paginatedLiberal?.length ?? 0}
+        >
+          <ClassList
+            filteredLiberalInfo={paginatedLiberal}
+            onModalOpen={onModalOpen}
+          />
+        </InfiniteScroll>
       </div>
 
       {modalOpen && (
         <Modal
-          liberalInfo={filteredLiberalInfo?.find((data) => data.id === id)}
+          liberalInfo={paginatedLiberal?.find((data) => data.id === id)}
           modalOpen={modalOpen}
           onModalClose={onModalClose}
         />
