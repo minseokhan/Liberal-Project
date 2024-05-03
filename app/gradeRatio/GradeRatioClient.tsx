@@ -39,7 +39,7 @@ const GradeRatioClient = () => {
 
   const { paginatedLiberal, isReachedEnd, size, setSize } =
     usePagination<SafeLiberal>(
-      `/api/test?area=${AreaArr.find((o) => o.area === area)?.id}&grade=${
+      `/api/liberal?area=${AreaArr.find((o) => o.area === area)?.id}&grade=${
         GradeArr.find((o) => o.grade === grade)?.id
       }&percent=${PercentArr.find((o) => o.percent === percent)?.id}&`
     );
