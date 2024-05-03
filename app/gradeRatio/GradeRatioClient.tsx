@@ -2,17 +2,14 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ClassList from "../components/ClassList";
 import Modal from "../components/Modal";
 import GradeSearch from "../components/search/GradeSearch";
 import { SafeLiberal } from "../types";
-import useSWR from "swr";
-import useSWRInfinite, { unstable_serialize } from "swr/infinite";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { usePagination } from "../hook/usePagination";
 import { LuLoader2 } from "react-icons/lu";
-import { mutate } from "swr";
 import { AreaArr, GradeArr, PercentArr } from "../data";
 import toast from "react-hot-toast";
 

@@ -7,7 +7,6 @@ import ClassList from "../components/ClassList";
 import Modal from "../components/Modal";
 import TitleSearch from "../components/search/TitleSearch";
 import { SafeLiberal } from "../types";
-import useSWR from "swr";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { LuLoader2 } from "react-icons/lu";
 import { usePagination } from "../hook/usePagination";
