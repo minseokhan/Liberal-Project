@@ -34,7 +34,7 @@ const GradeRatioClient = () => {
     }
   }, [modalOpen]);
 
-  const { paginatedLiberal, isReachedEnd, size, setSize } =
+  const { paginatedLiberal, isReachedEnd, size, loadingMore, setSize } =
     usePagination<SafeLiberal>(
       `/api/liberal?area=${AreaArr.find((o) => o.area === area)?.id}&grade=${
         GradeArr.find((o) => o.grade === grade)?.id
@@ -101,9 +101,11 @@ const GradeRatioClient = () => {
           next={() => setSize(size + 1)}
           hasMore={!isReachedEnd}
           loader={
-            <div className="w-full flex justify-center mb-12">
-              <LuLoader2 size={30} className="text-blue6 animate-spin" />
-            </div>
+            loadingMore && (
+              <div className="w-full flex justify-center mb-12">
+                <LuLoader2 size={30} className="text-blue6 animate-spin" />
+              </div>
+            )
           }
           dataLength={paginatedLiberal?.length ?? 0}
           className="w-full"
