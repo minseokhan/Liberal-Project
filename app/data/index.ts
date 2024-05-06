@@ -7,6 +7,7 @@ export const AreaArr = [
   { area: "인문과예술영역", id: 5 },
   { area: "사회와세계영역", id: 6 },
   { area: "가상대학영역", id: 7 },
+  { area: "일반영역", id: 8 },
 ];
 
 export const GradeArr = [
